@@ -1,7 +1,6 @@
 import s from './Users.module.css';
 import userPhoto from '../../assets/images/user.jpg';
 import { NavLink } from 'react-router-dom';
-import { usersAPI } from '../../api/api';
 
 let Users = (props) => {
 
@@ -31,20 +30,10 @@ let Users = (props) => {
                     </div>
                     <div>
                         {u.followed 
-                        ? <button onClick={() => {
-                            usersAPI.unfollow(u.id)
-                                .then(response => {
-                                    if(response.data.resultCode === 0) {
-                                        props.unfollow(u.id) 
-                                    }
-                                });}}>unfollow</button> 
-                        : <button onClick={() => { 
-                            usersAPI.follow(u.id)
-                                .then(response => { 
-                                    if(response.data.resultCode === 0) {
-                                        props.follow(u.id) 
-                                    }
-                                });}}>follow</button>}
+                        ? <button disabled={props.isFollowing.some(id => id === u.id)} 
+                        onClick={() => {props.unfollow(u.id) }}>unfollow</button> 
+                        : <button disabled={props.isFollowing.some(id => id === u.id)} 
+                        onClick={() => {props.follow(u.id) }}>follow</button>}
                     </div>
                 </span>
                 <span>
