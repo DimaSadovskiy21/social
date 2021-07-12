@@ -1,5 +1,6 @@
 import s from './ProfileInfo.module.css';
 import Loading from './../../../common/Loading/Loading'
+import ProfileStatus from './ProfileStatus';
 
 const ProfileInfo = (props) => {
 
@@ -15,6 +16,7 @@ const ProfileInfo = (props) => {
                 <div>
                     {props.profile.fullName} <br/>
                     {props.profile.contacts.github}
+                   <ProfileStatus status={props.status} updateUserStatus={props.updateUserStatus}/>
                 </div>
                 ava + description
             </div>

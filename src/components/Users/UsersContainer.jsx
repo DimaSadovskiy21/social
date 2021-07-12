@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { follow, unfollow, getUsers } from "../../redux/users-reducer";
 import Users from './Users';
 import Loading from '../../common/Loading/Loading';
+import { compose } from 'redux';
+import { getCount, getCurrentPage, getIsFetching, getIsFollowing, getPage, getUser } from '../../redux/users-selectors';
 
 
 
@@ -30,15 +32,29 @@ class UsersContainer extends React.Component {
 }
 
 
+// let mapStateToProps = (state) => {
+//     return {
+//         users: state.usersPage.users,
+//         count: state.usersPage.count,
+//         page: state.usersPage.page,
+//         currentPage: state.usersPage.currentPage,
+//         isFetching: state.usersPage.isFetching,
+//         isFollowing: state.usersPage.isFollowing,
+//     }
+// }
+ 
+
 let mapStateToProps = (state) => {
     return {
-        users: state.usersPage.users,
-        count: state.usersPage.count,
-        page: state.usersPage.page,
-        currentPage: state.usersPage.currentPage,
-        isFetching: state.usersPage.isFetching,
-        isFollowing: state.usersPage.isFollowing,
+        users: getUser(state),
+        count: getCount(state),
+        page: getPage(state),
+        currentPage: getCurrentPage(state),
+        isFetching: getIsFetching(state),
+        isFollowing: getIsFollowing(state),
     }
 }
- 
-export default connect(mapStateToProps, {follow, unfollow, getUsers})(UsersContainer);
+
+export default compose(
+    connect(mapStateToProps, {follow, unfollow, getUsers}),
+)(UsersContainer)

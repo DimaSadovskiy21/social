@@ -6,7 +6,8 @@ const Header = (props) => {
         <header>
             <img src="https://w7.pngwing.com/pngs/720/947/png-transparent-logo-dvd-region-code-encapsulated-postscript-world-wide-web-blue-cdr-text.png" />
             <div className={s.loginBlock}>
-            { props.isAuth ? props.login
+            { props.isAuth 
+                ? <div>{props.login} - <button onClick={props.logout}>Log out</button></div> 
                 : <NavLink to={'/login'}>Login</NavLink> }
             </div>
         </header>
