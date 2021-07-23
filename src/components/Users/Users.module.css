@@ -7,11 +7,3 @@
 .user {
     margin: 10px;
 }
-
-.pageNumber {
-    cursor: pointer;
-}
-
-.selectedPage {
-    font-weight: bold;
-}

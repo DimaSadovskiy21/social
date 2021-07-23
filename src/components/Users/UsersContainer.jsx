@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from "react-redux";
 import { follow, unfollow, getUsers } from "../../redux/users-reducer";
 import Users from './Users';
@@ -8,26 +8,26 @@ import { getCount, getCurrentPage, getIsFetching, getIsFollowing, getPage, getUs
 
 
 
-class UsersContainer extends React.Component {
-    componentDidMount() {
-        this.props.getUsers(this.props.currentPage, this.props.count);
+const UsersContainer = (props) => {
+
+    useEffect(() => {
+        props.getUsers(props.currentPage, props.count);
+    }, [props.currentPage, props.count])
+
+    const onPageChanged = (currentPage) => {
+        props.getUsers(currentPage, props.count);
     }
 
-    onPageChanged = (currentPage) => {
-        this.props.getUsers(currentPage, this.props.count);
-    }
 
 
-
-    render() {
-        return <> 
-        {this.props.isFetching 
-        ? <Loading/> 
-        : <Users users={this.props.users} page={this.props.page} count={this.props.count} 
-        onPageChanged={this.onPageChanged} currentPage={this.props.currentPage} unfollow={this.props.unfollow} 
-        follow={this.props.follow} isFollowing={this.props.isFollowing} toggleIsFollowing={this.props.toggleIsFollowing}/>}
-        </>
-    }
+   
+        return <div> 
+        {props.isFetching ? <Loading/> : null}
+        <Users users={props.users} page={props.page} count={props.count} 
+        onPageChanged={onPageChanged} currentPage={props.currentPage} unfollow={props.unfollow} 
+        follow={props.follow} isFollowing={props.isFollowing} toggleIsFollowing={props.toggleIsFollowing}/>}
+        </div>
+    
 
 }
 

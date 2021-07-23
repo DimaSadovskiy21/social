@@ -1,0 +1,13 @@
+.pageNumber {
+    cursor: pointer;
+    padding: 2px;
+}
+
+.selectedPage {
+    font-weight: bold;
+}
+
+.pageNumber.selectedPage {
+    font-weight: bold;
+    border-color: black;
+}
