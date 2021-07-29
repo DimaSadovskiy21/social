@@ -11,7 +11,7 @@ const ProfileStatusWithHooks = (props) => {
     }, [props.status] )
 
     const activeteEditMode = () => {
-        setEditMode(true);
+            setEditMode(true);  
     }
 
     const deActiveteEditMode = () => {
@@ -28,7 +28,7 @@ const ProfileStatusWithHooks = (props) => {
             <div>
                 {!editMode &&
                 <div>
-                    <span onDoubleClick={activeteEditMode}>{props.status || "No status"}</span>
+                    <span onDoubleClick={props.isOwner && activeteEditMode}><b>Status: </b>{props.status || "No status"}</span>
                 </div>}
                 {editMode &&
                 <div>

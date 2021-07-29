@@ -10,7 +10,7 @@ import s from './../../common/FormControls/FormControls.module.css';
 const Login = (props) => {
 
     const onSubmit = (formData) => {
-        props.login(formData.email, formData.password, formData.rememberMe)
+        props.login(formData.email, formData.password, formData.rememberMe, formData.captcha)
     }
 
     if(props.isAuth) {
@@ -20,7 +20,7 @@ const Login = (props) => {
     return (
         <div>
             <h1>Login</h1>
-            <LoginReduxForm onSubmit={onSubmit}/>
+            <LoginReduxForm captchaURL={props.captchaURL} onSubmit={onSubmit}/>
         </div>
 
     )
@@ -40,6 +40,8 @@ const LoginForm = (props) => {
                 <div>
                     <Field name={'rememberMe'} component={Input} type={"checkbox"}/> remember Me
                 </div>
+                {props.captchaURL && <img src={props.captchaURL}/>}
+                {props.captchaURL && <Field name={'captcha'} component={Input} placeholder={"symbols from image"} validate={[required]}/>}
                 {props.error && <div className={s.formSummuryError}>
                     {props.error}
                     </div>}
@@ -57,7 +59,8 @@ let LoginReduxForm  = reduxForm({
 
 let mapStateToProps = (state) => {
       return {
-          isAuth: state.auth.isAuth
+        captchaURL: state.auth.captchaURL,
+        isAuth: state.auth.isAuth
       }
   }
 
